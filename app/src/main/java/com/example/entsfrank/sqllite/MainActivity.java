@@ -107,5 +107,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
     public void deleteContact(View view) {
+        //get id to delete
+        String id = idEditText.getText().toString();
+
+        //delete matching id in database
+        contactsDB.execSQL("DELETE FROM contacts where id = "+ id + ";");
+
+
     }
 }
