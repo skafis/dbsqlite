@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void createDatabase(View view) {
+        //check database and connection if exist
         try {
             contactsDB=this.openOrCreateDatabase("myDb",
                     MODE_PRIVATE,null);
@@ -49,15 +50,18 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this, "Data base created", Toast.LENGTH_SHORT).show();
             }
             else {
-                Toast.makeText(this, "No Databse", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "No Database", Toast.LENGTH_SHORT).show();
 
             }
         }
         catch (Exception e ){
             Log.e("mydb error", "error creating Database");
         }
-
-
+        //set buttons to be clickable
+        addContactButton.setClickable(true);
+        deleteContactButton.setClickable(true);
+        getContactsButton.setClickable(true);
+        deleteDBButtons.setClickable(true);
     }
 
     public void addContact(View view) {
