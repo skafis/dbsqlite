@@ -1,5 +1,6 @@
 package com.example.entsfrank.sqllite;
 
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -71,7 +72,39 @@ public class MainActivity extends AppCompatActivity {
         contactsDB.execSQL("INSERT INTO contacts(name, email)VALUES('" + contactName + ",'" + contactEmail + "');");
 
     }
+    //Display contacts
     public void getContacts(View view) {
+        Cursor cursor = contactsDB.rawQuery("SELECT * FROM contacts",null);
+
+        int idColumn = cursor.getColumnIndex("id");
+        int nameColumn = cursor.getColumnIndex("name");
+        int emailColumn = cursor.getColumnIndex("email");
+
+        //move to firts row of results
+        cursor.moveToFirst();
+
+        String contactList = " ";
+        //verify if we have results
+        if (cursor != null && (cursor.getCount()>0)){
+
+            //cycle through results
+            do {
+                //store results
+                String id= cursor.getString(idColumn);
+                String name = cursor.getString(nameColumn);
+                String email = cursor.getString(emailColumn);
+
+                //save to contact list
+                contactList = contactList + id+ " : " + name+ " : " + email + "\n";
+
+
+            }while (cursor.moveToNext());
+
+            contactListEditText.setText(contactList);
+        }else {
+            Toast.makeText(this,"no results found", Toast.LENGTH_SHORT).show();
+            contactListEditText.setText("");
+        }
     }
     public void deleteContact(View view) {
     }
