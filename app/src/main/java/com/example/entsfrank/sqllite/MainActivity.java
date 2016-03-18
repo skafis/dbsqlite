@@ -3,6 +3,7 @@ package com.example.entsfrank.sqllite;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -36,6 +37,26 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void createDatabase(View view) {
+        try {
+            contactsDB=this.openOrCreateDatabase("myDb",
+                    MODE_PRIVATE,null);
+            contactsDB.execSQL("Crete tableif not there " +
+                    "(id integer primary key, name VARCHAR, email VARCHAR);" );
+
+            File database = getApplicationContext().getDatabasePath("myDB.db");
+
+            if (!database.exists()){
+                Toast.makeText(this, "Data base created", Toast.LENGTH_SHORT).show();
+            }
+            else {
+                Toast.makeText(this, "No Databse", Toast.LENGTH_SHORT).show();
+
+            }
+        }
+        catch (Exception e ){
+            Log.e("mydb error", "error creating Database");
+        }
+
 
     }
 
