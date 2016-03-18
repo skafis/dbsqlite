@@ -63,14 +63,16 @@ public class MainActivity extends AppCompatActivity {
         getContactsButton.setClickable(true);
         deleteDBButtons.setClickable(true);
     }
-
+    //add new row of data to database
     public void addContact(View view) {
+        String contactName = nameEditText.getText().toString();
+        String contactEmail = emailEditText.getText().toString();
+        //insert into DB
+        contactsDB.execSQL("INSERT INTO contacts(name, email)VALUES('" + contactName + ",'" + contactEmail + "');");
+
     }
-
-
-    public void deleteContact(View view) {
-    }
-
     public void getContacts(View view) {
+    }
+    public void deleteContact(View view) {
     }
 }
