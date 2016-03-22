@@ -115,4 +115,15 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+    public void deleteDatabase(View view) {
+        //Delete databsae
+        this.deleteDatabase("myDB");
+    }
+
+    @Override
+    protected void onDestroy() {
+        contactsDB.close();
+        super.onDestroy();
+    }
 }
